@@ -1,4 +1,4 @@
-import { createService, findAllService } from "../services/user.service.js";
+import { createService, findAllService, findByIdService, updateService } from "../services/user.service.js";
 import mongoose from "mongoose";
 
 const create = async (req, res) => {
@@ -28,7 +28,7 @@ const create = async (req, res) => {
         }
     })
     }catch(error) {
-        return res.status(500).send(error);
+        return res.status(500).send(error.message);
     }
 
 }
@@ -53,19 +53,63 @@ const findAll = async (req, res) => {
 
 const findById = async (req, res) => {
     try {
-        const {id} = req.params;
+        
+        const user = await findByIdService(id);
 
-        if(!mongoose.isValidObjectId(id)) {
-            return res.status(400).send({message: 'ID invalid'})
+        if(!user) {
+            return res.status(400).send({message: 'User not Found'})
         }
 
+        return res.send({
+            message: 'User found successfully',
+            user: {
+                id: user._id,
+                name: user.name,
+                username: user.username,
+                email: user.email,
+                avatar: user.avatar,
+                background: user.background
+            }
+        })
         
     }catch(error) {
-        return res.status(500).send(error)
+        return res.status(500).send(error.message)
+    }
+}
+
+const update = async (req, res) => {
+    try{
+        // quero atualizar um local especifico ou todos os campos
+        const {name, username, email, avatar, background} = req.body;
+        const tamanho = Object.keys(req.body).length;
+        const id = req.userId;
+
+        if(!name && !username && !email && !avatar && !background) {
+            return res.status(400).send({message: "Submit at least one field for update"})
+        }
+
+        if(tamanho > 1){
+            return res.status(400).send({message: 'Only one item can be updated at a time '})
+        }
+
+        const user = await findByIdService(id);
+
+        if(!user) {
+            return res.status(400).send({message: 'User not found'})
+        }
+
+        // acessar o banco de dados buscar o usuário e alterar os campos
+        const userUpdate = await updateService(id, {name, username, email, avatar, background});
+
+        res.send('User update successfully')
+    }catch(error){
+        return res.status(500).send(error.message)
     }
 }
 
 export {
     create,
-    findAll
+    findAll,
+    findById,
+    update
 }
