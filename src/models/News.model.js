@@ -3,32 +3,32 @@ import mongoose from "mongoose";
 const NewsSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        require: true
     },
     text: {
         type: String,
-        required: true
+        require: true
     },
     banner: {
         type: String,
-        required: true
+        require: true
     },
     creatAt: {
         type: Date,
         default: Date.now(),
+        require: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
-        required: true
+        require: true
     },
     likes: {
         type: Array,
-        required: true
     },
+    
     comments: {
-        typeof: Array,
-        required: true
+        type: Array,
     }
 
 })
