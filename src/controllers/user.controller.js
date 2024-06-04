@@ -54,7 +54,7 @@ const findAll = async (req, res) => {
 const findById = async (req, res) => {
     try {
 
-        const id = req.id;
+        const id = req.userId;
         const user = req.user;
 
         return res.send({
@@ -79,7 +79,7 @@ const update = async (req, res) => {
         // quero atualizar um local especifico
         const { name, username, email, avatar, background } = req.body;
         const tamanho = Object.keys(req.body).length;
-        const id = req.id;
+        const id = req.userId;
 
         if (!name && !username && !email && !avatar && !background) {
             return res.status(400).send({ message: "Submit at least one field for update" })

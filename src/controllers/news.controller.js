@@ -166,10 +166,9 @@ const searchNewsByTitle = async (req, res) => {
 
 const searchNewsByUser = async (req, res) => {
     try{
-        const {idUser} = req.params;
-        console.log(idUser)
+        const id = req.userId;
 
-        const news = await searchNewsByUserService(idUser);
+        const news = await searchNewsByUserService(id);
         if(!news) {
             return res.status(400).send({message: 'Not found news by user'})
         }
@@ -177,6 +176,29 @@ const searchNewsByUser = async (req, res) => {
 
         return res.send({
             message: 'These are all news find of user',
+            news: news
+        })
+    }catch(error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+const updateNewsByUser = async (req, res) => {
+    try{
+        // captura o id do item a ser editar
+        const {id} = req.params;
+
+        const news = await findByIdService(id);
+        // buscar as noticias
+        if(!news) {
+            return res.status(400).send({message: 'Not found news '})
+        }
+        // capturar o usuário que postou o item
+        // depois ánalisar o usuário que esta autenticado com o usuario que postou o item
+        // se os usuários são o mesmos, tanto de quem está autenticado e de quem postou o sistema vai permitir editar o item, se não for os mesmo usuários o sistema não irá permitir
+
+        return res.send({
+            message: 'Update successfully post news',
             news: news
         })
     }catch(error) {
@@ -193,5 +215,6 @@ export {
 
     topNews,
     searchNewsByTitle,
-    searchNewsByUser
+    searchNewsByUser,
+    updateNewsByUser
 } 

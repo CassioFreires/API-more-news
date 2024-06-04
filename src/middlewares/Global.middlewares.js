@@ -16,15 +16,13 @@ const validId = (req, res, next) => {
 
 const validUser = async (req, res, next) => {
 
-    const {id} = req.params;
-    const user = await findByIdService(id);
+    const userId = req.userId;
+    const user = await findByIdService(userId);
 
     if(!user) {
         return res.status(400).send({message: 'User not Found'})
     }
 
-   
-    req.id= id;
     req.user = user;
     next();
 }
