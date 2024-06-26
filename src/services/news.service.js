@@ -17,15 +17,23 @@ const searchNewsByTitleService = (title) =>  {
 
 const searchNewsByUserService = (idUser) => NewsModel.find({user: {_id: idUser}}).sort({_id: -1}).populate('user')
 
+const likeService = (id) => NewsModel.findOneAndUpdate({_id: id});
+const commentService = (id, body) => NewsModel.findOneAndUpdate({_id: id}, {comments: body})
+const deleteCommentService = (id, idComment) => NewsModel.findOneAndUpdate({_id: id}, {$pull: {comments: {_id: idComment}}})
+
 
 export {
     createService,
     findAllService,
     findByIdService,
     updateService,
+
     deleteByIdService,
     totalPageService,
     topNewsService,
     searchNewsByTitleService,
-    searchNewsByUserService
+    searchNewsByUserService,
+    likeService,
+    commentService,
+    deleteCommentService
 }

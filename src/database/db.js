@@ -5,7 +5,7 @@ const connectDatabase = async() => {
         const url = process.env.MONGODB_URI;
     return await mongoose.connect(url)
     } catch(e) {
-        return console.log(e)
+        return console.log(e.message)
     }
 }
 
