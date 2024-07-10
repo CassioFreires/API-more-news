@@ -13,7 +13,7 @@ routerNews.delete('/delete/:id', AuthMiddleware, validId, exclude);
 
 // rotas costumizadas
 routerNews.get('/topNews', topNews);
-routerNews.get('/searchNewsByTitle/:title', searchNewsByTitle);
+routerNews.get('/searchNewsByTitle', searchNewsByTitle);
 routerNews.get('/searchNewsByUser', AuthMiddleware, validUser, searchNewsByUser);
 routerNews.patch('/updateNewsByUser/:id', AuthMiddleware, validId, updateNewsByUser);
 routerNews.delete('/deleteNewsByUser/:id', AuthMiddleware, validId, excludeNewsByUser);

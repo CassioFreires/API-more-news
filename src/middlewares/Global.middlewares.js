@@ -16,7 +16,7 @@ const validId = (req, res, next) => {
 
 const validUser = async (req, res, next) => {
 
-    const userId = req.userId;
+    const userId = req.id;
     const user = await findByIdService(userId);
 
     if(!user) {

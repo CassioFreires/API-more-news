@@ -3,6 +3,7 @@ import { connectDatabase } from './src/database/db.js';
 import routerUser from './src/routers/user.router.js';
 import routerAuth from './src/routers/auth.router.js';
 import routerNews from './src/routers/news.router.js';
+import swaggerRouter from './src/routers/swegger.router.js';
 import dotenv from 'dotenv'
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/user', routerUser);
 app.use('/auth', routerAuth);
 app.use('/news', routerNews);
+app.use('/swagger', swaggerRouter);
 
 connectDatabase()
 .then(() => {

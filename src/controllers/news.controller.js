@@ -146,7 +146,7 @@ const topNews = async (req, res) => {
 
 const searchNewsByTitle = async (req, res) => {
     try {
-        const { title } = req.params;
+        const { title } = req.query;
         if (!title) {
             return res.status(400).send({ message: 'Submit a text for find the news by title' })
         }
