@@ -101,6 +101,11 @@
                 "tags": [
                     "Users"
                 ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -272,6 +277,7 @@
                 "tags": [
                     "News"
                 ],
+                
                 "parameters": [
                     {
                         "name": "page",
@@ -350,6 +356,11 @@
                 "tags": [
                     "News"
                 ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -393,6 +404,11 @@
                 "description": "",
                 "tags": [
                     "News"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
                 ],
                 "parameters": [
                     {
@@ -514,6 +530,11 @@
                 "description": "Route responsable for update at least yours news",
                 "tags": [
                     "News"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
                 ],
                 "parameters": [
                     {
